@@ -5,8 +5,8 @@ An interactive **tier list web application** built with **Node.js, Express, SQLi
 ---
 
 ## 🌐 Live Demo
-- 👉 **Tier List(Main App):** [View Website Live]()
-- 👉 **Users(Admin View):** [View Website Live]()
+- 👉 **Tier List(Main App):** [View Website Live](https://fast-food-tier-list-project.onrender.com/ranklist)
+- 👉 **Users(Admin View):** [View Website Live](https://fast-food-tier-list-project.onrender.com/users)
 
 ---
 
