@@ -1,6 +1,8 @@
+const fs = require('fs'); // Ensures the database folder exists
 const path = require('path') // for safe file paths
 const sqlite3 = require('sqlite3').verbose() //imports the sqlite3, and used verbose to show full stack traces
 const DB_FILE = process.env.DATABASE_FILE || path.join(__dirname, '..', 'data', 'fastfood.db'); // database file path, either from environement variable or default to fastfood.db in the current directory
+fs.mkdirSync(path.dirname(DB_FILE), { recursive: true}); // Creates a parent folder if it is missing
 const db = new sqlite3.Database(DB_FILE); // Opens the database at the configured file path, and if the file does not exist, it will be created
 
 const hbs = require('hbs') // imports hbs
