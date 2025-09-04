@@ -1,0 +1,16 @@
+<!DOCTYPE html> {{!-- Setup our HTML document--}}
+<html>
+<head>
+    <title>{{title}}</title> {{!--this is the page title for the users shown on the browser tab--}}
+    <link rel="stylesheet" href="/styles/styles.css"> {{!--links our css file--}}
+    <link rel="icon" type="image/png" href="/favicon-users.png"> {{!--Links the favicon image--}}
+</head>
+<body>
+    <div class="container"> {{!-- our class container for css styling--}}
+        <h1>Users List</h1> {{!-- header level 1 showing the statement at the top of the page--}}
+        {{#each userRegistred}} {{!-- a hbs loop so that it goes through each user present in the userRegistred array--}} 
+        <p class="user-row" data-role="{{this.role}}">{{this.userid}}</p> {{!-- displays the userid and role of the user --}}
+        {{/each}} {{!-- ends the hbs loop --}}
+    </div>
+</body>
+</html>

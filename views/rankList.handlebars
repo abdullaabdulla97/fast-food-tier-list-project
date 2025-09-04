@@ -1,0 +1,24 @@
+<!DOCTYPE html> {{!-- Setup our HTML document--}}
+<html>
+<head>
+    <title>{{title}}</title> {{!--this is the page title for the ranklist shown on the browser tab--}}
+    <link rel="stylesheet" href="/styles/styles.css"> {{!--links our css file--}}
+    <link rel="icon" type="image/png" href="/favicon-ranking.png"> {{!--Links the favicon image--}}
+</head>
+<body>
+    <div class="rankList"> {{!-- this is our class rankList--}}
+        <h1>Ranking Fast Food Restaurants</h1> {{!-- header level 1--}}
+        {{#each tier}} {{!-- hbs loop so that it loops through each object to build the rows (S to F) --}}
+        <div class="rank-row" id="rank-{{@key}}"> {{!-- this is our class rank-row and @key to build id for each row (S to F) --}}
+            <div class="rank-label">{{@key}}</div> {{!-- this is our rank-label class and @key to build the label for each row (S to F) --}}
+            {{#each this}} {{!-- using the hbs loop again so that it loops through each object to build the logos --}}
+            <img src="{{this.logo}}" class="logo" data-name="{{this.name}}"> {{!-- shows the logo of the fast food restaurant and data-name for name of the restaurant, class is logo for our css styling so that it can be easy to track to drag and drop it --}}
+            {{/each}} {{!-- end the hbs loop for our logo --}}
+        </div>
+        {{/each}} {{!-- end the hbs loop for our rank row (S to F) --}}
+        <h2>List of Fast Food Restaurants</h2> {{!-- header level 2 will be shown above the logo images--}}
+        <div id="logolist" class="rank-row"></div> {{!-- contains the logos of our fast food restaurants, but it is empty it gets added through js, created a class called rank-row for our css styling --}} 
+    </div>
+    <script src="/js/script.js"></script> {{!-- link our script.js file so that images can shown and be able to drag and drop it to the rank --}}
+</body>
+</html>

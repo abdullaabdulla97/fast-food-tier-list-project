@@ -1,0 +1,111 @@
+/*General Styles Start*/
+
+html { /* applies to the entire html document */
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+.container { /* our container class for css styling */
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/*General Styles End*/
+
+/*Rank List Page Start*/
+
+h1 { /* header level 1 showing the statement at the top of the page */
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+h2 { /* header level 2 showing the statement at the top of the page */
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.rankList { /* this is our class ranklist*/
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.861);
+    border-radius: 20px;
+}
+
+.rank-row { /* this is our class rank-row*/
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    min-height: 90px;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+.rank-label { /* this is our class rank-label*/
+    font-weight: bold;
+    font-size: 19px;
+    width: 38px;
+    margin-right: 9px;
+}
+
+.logo { /* this is our class logo*/
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border: 1px solid black;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+/*Rank List Page End*/
+
+/*Users Page Start*/
+
+.container > h1 { /* styles the h1 inside the container class */
+    color: black;
+}
+.user-row { /* styles each user row */
+  background: rgba(0, 0, 0, 0.861); 
+  border: 1px solid black; 
+  border-radius: 12px;
+  padding: 12px 14px; 
+  margin: 10px 0; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  color: white;
+}
+.user-row::after { /* styles the role badge */
+  content: attr(data-role);
+  text-transform: capitalize;
+  padding: 4px 10px; 
+  font-size: 12px; 
+  border-radius: 999px;
+  border: 1px solid #2a2f40; 
+  color: white;
+}
+
+.user-row[data-role="admin"]::after { /* styles the admin role badge */
+  color: white; 
+  background: rgba(255, 77, 80, 0.365); 
+  border-color: rgba(255,77,79,.28);
+}
+.user-row[data-role="guest"]::after  { /* styles the guest role badge */
+  color: white; 
+  background: rgba(40, 199, 111, 0.329); 
+  border-color: rgba(40, 199, 111, 0.525);
+}
+
+/*Users Page End*/
+
+
+
