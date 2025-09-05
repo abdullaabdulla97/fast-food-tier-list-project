@@ -47,6 +47,7 @@ h2 { /* header level 2 showing the statement at the top of the page */
     background-color: white;
     color: black;
     border-radius: 5px;
+    touch-action: none;
 }
 
 .rank-label { /* this is our class rank-label*/
@@ -64,6 +65,8 @@ h2 { /* header level 2 showing the statement at the top of the page */
     margin: 5px;
     border-radius: 5px;
     padding: 3px;
+    touch-action: none;
+    user-select: none;
 }
 
 /*Rank List Page End*/
