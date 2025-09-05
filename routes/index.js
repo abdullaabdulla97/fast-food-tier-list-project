@@ -1,8 +1,6 @@
-const fs = require('fs'); // Ensures the database folder exists
 const path = require('path') // for safe file paths
 const sqlite3 = require('sqlite3').verbose() //imports the sqlite3, and used verbose to show full stack traces
 const DB_FILE = process.env.DATABASE_FILE || path.join(__dirname, '..', 'data', 'fastfood.db'); // database file path, either from environement variable or default to fastfood.db in the current directory
-fs.mkdirSync(path.dirname(DB_FILE), { recursive: true}); // Creates a parent folder if it is missing
 const db = new sqlite3.Database(DB_FILE); // Opens the database at the configured file path, and if the file does not exist, it will be created
 
 const hbs = require('hbs') // imports hbs
@@ -24,6 +22,9 @@ db.serialize(function() { // a function so that it runs based on order
 })
 
 exports.authenticate = function(request, response, next) { // function for user authentication
+  if (request.path === '/register' && (request.method === 'GET' || request.method === 'POST')) { // 
+    return next() // if the user is on the register page, then it will move on to the next middleware 
+  }
   /*
 	Middleware to do BASIC http 401 authentication
 	*/
@@ -89,6 +90,33 @@ exports.users = function(request, response) {// created a function for the users
     response.render('users', {title: 'List of Users', userRegistred: rows}) // rendering the user page to contain a title List of Users and to display the users in the database (https://www.topcoder.com/thrive/articles/using-ejs-template-engine-with-express-js)
   })
 }
+
+// GET /register - render a small signup page (no auth required)
+exports.registerPage = function(request, response) {
+  response.render('register', { title: 'Create Guest Account' }); // rendering the register page to have the title Create Guest Account (https://www.topcoder.com/thrive/articles/using-ejs-template-engine-with-express-js)
+};
+
+// POST /register - JSON or form submit to create a guest account (no auth required)
+exports.register = function(request, response) {
+  const { userid, password } = request.body || {}; // get userid and password from the request body
+  if (!userid || !password) { // if either userid or password is missing
+    return response.status(400).json({ error: 'userid and password are required' }); // then send a 400 with an error message
+  }
+
+  const sql = `INSERT INTO users (userid, password, role) VALUES (?, ?, 'guest')`; // SQL to insert a new user with the role 'guest'
+  db.run(sql, [userid.trim(), password], function(err) { // run the sql command with the provided userid and password
+    if (err) { // if there is an error
+      if (err.code === 'SQLITE_CONSTRAINT') { // if the error is due to a constraint violation (e.g., duplicate userid)
+        return response.status(409).json({ error: 'User already exists' }); // then send a 409 with an error message
+      }
+      console.error('Register error:', err); // log any other errors
+      return response.status(500).json({ error: 'Internal server error' }); // send a 500 for other errors
+    }
+    // Success
+    return response.status(201).json({ message: 'Account created.' }); // if successful, send a 201 with a success message
+  });
+};
+
 
 exports.rankList = function(request, response) { // created a function for the rankList page
   const ranks = ['S', 'A', 'B', 'C', 'D', 'F'] // this is the ranks to rank the fast food restaurants
