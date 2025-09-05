@@ -47,7 +47,7 @@ h2 { /* header level 2 showing the statement at the top of the page */
     background-color: white;
     color: black;
     border-radius: 5px;
-    touch-action: none;
+    touch-action: none; /* this is to prevent scrolling on mobile when dragging */
 }
 
 .rank-label { /* this is our class rank-label*/
@@ -66,7 +66,7 @@ h2 { /* header level 2 showing the statement at the top of the page */
     border-radius: 5px;
     padding: 3px;
     touch-action: none;
-    user-select: none;
+    user-select: none; /* prevent text selection while dragging */
 }
 
 /*Rank List Page End*/
@@ -110,5 +110,94 @@ h2 { /* header level 2 showing the statement at the top of the page */
 
 /*Users Page End*/
 
+/*Register Page Start*/
+body.register-page { /* applies to the body element when it has the class register-page */
+  background: #111111;
+  color: white;
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
 
+.register-card { /* this is our class register-card*/
+  background: rgba(255, 255, 255, 0.06);
+  padding: 50px;
+  border-radius: 14px;
+  width: 400px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
 
+.register-title { /* this is our class register-title*/
+  margin: 0 0 30px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.register-footer { /* this is our class register-footer*/
+  margin: 0 0 12px;
+  font-size: 14px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.register-footer a { /* styles the anchor links inside the register-footer class*/
+    text-decoration: none;
+    color: red;
+}
+
+.register-footer a:hover { /* styles the anchor links inside the register-footer class when hovered*/
+    text-decoration: underline;
+    color: white;
+}
+
+.register-msg { /* this is our class register-msg*/
+    margin-top: 4px;
+    padding: 10px 12px;
+    color: #b42318;
+    text-align: center;
+    font-size: 14px;
+}
+.register-msg.success { /* styles the success message */
+    color: green;
+}
+.register-msg.error { /* styles the error message */
+    color: red;
+}
+
+.form-group { /* this is our class form-group*/
+  margin-top: 20px;
+}
+
+.form-label { /* this is our class form-label*/
+  display: block;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.form-input { /* this is our class form-input*/
+  width: 375px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: white;
+  color: black;
+}
+
+.btn { /* this is our class btn*/
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #2f9e44;
+  color: white;
+}
+
+.btn:hover { /* styles the button when hovered*/
+    background: green;
+}
+
+/*Register Page End*/
