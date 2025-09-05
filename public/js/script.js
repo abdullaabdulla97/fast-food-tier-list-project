@@ -21,7 +21,7 @@ function logoRestaurant(restaurant) { // created a function called logoRestauran
   image.draggable = false                  // disable native HTML5 image drag
   image.addEventListener('dragstart', e => e.preventDefault())
 
-  //  Switched from mouse events to pointer events so it works on mobile too
+  //  SWITCHED from mouse events to pointer events so it works on mobile too
   image.addEventListener('pointerdown', function(e) { // when a user touches/clicks on the image it will begin the dragging process
     dragging = image // store the image that is dragged in the variable dragging
 
@@ -80,6 +80,7 @@ function handleMouseUp(e) { // this function is created to handle the mouse/poin
         try { 
           dragging.releasePointerCapture(activePointerId) 
         } catch (_) {}
+        activePointerId = null // reset the active pointer id
       }
       dragging = null // set it to null because it is not being dragged any longer
       document.removeEventListener('pointermove', handleMouseMove) // remove move handler
@@ -102,6 +103,7 @@ function handleMouseUp(e) { // this function is created to handle the mouse/poin
       dragging.releasePointerCapture(activePointerId) 
     } catch (_) {}
   }
+  activePointerId = null // reset the active pointer id
   dragging = null // set it to null because it is not being dragged any longer
   document.removeEventListener('pointermove', handleMouseMove) // remove move handler
   e.preventDefault() // to prevent default behaviour 
@@ -119,6 +121,74 @@ function showLogos() { // this function is created show the logos of the fast fo
   })
 }
 
-document.addEventListener('DOMContentLoaded', showLogos) // the page will then contain the logos of the fast food restaurant once the function showLogos is called
+// Registration page
+function initRegisterPage() { // this function is created to initialize the register page
+  const usernameEl   = document.getElementById('username'); // get the username input element
+  const passwordEl = document.getElementById('password'); // get the password input element
+  const submitBtn  = document.getElementById('submitBtn'); // get the submit button element
+  const statusEl   = document.getElementById('status'); // get the status element to show messages to the user
+
+  if (!submitBtn || !usernameEl || !passwordEl || !statusEl) { // if any of the elements are not found
+    return; // then return nothing and exits
+  }
+
+  submitBtn.addEventListener('click', async () => { // when the submit button is clicked, it will then call this function
+    const username = (usernameEl.value || '').trim(); // get the value of the username input element and trim any whitespace
+    const password = passwordEl.value || ''; // get the value of the password input element
+
+    function setStatus(el, message, kind) { // this function is created to set the status message to the user
+      if (!el) { // if the element is not found
+        return; // then return nothing and exits
+      }
+      el.textContent = message || ''; // set the text content of the element to the message
+      el.classList.remove('success', 'error'); // remove any existing classes (success or error)
+      if (kind === 'success') { // if the kind is success
+        el.classList.add('success'); // then add the class success to the element
+      } else if (kind === 'error') { // if the kind is error
+        el.classList.add('error'); // then add the class error to the element
+      }
+    }
+
+    setStatus(statusEl, ''); // clear any existing status message
+
+    if (!username || !password) { // if the username or password is empty
+      setStatus(statusEl, 'Please enter a username and password.', 'error'); // then shows this message to the user
+      return; // and exits
+    }
+
+    try {
+      const res = await fetch('/register', { // makes a POST request to the server to register the user using the express route /register
+        method: 'POST', // this is a POST request
+        headers: { 'Content-Type': 'application/json' }, // the content type is JSON
+        body: JSON.stringify({ userid: username, password }) // the body of the request contains the username and password in JSON format
+      });
+      const ok = res.status === 201; // checks if the response status is 201 (Created)
+      const conflict = res.status === 409; // checks if the response status is 409 (Conflict)
+      const bad = res.status === 400; // checks if the response status is 400 (Bad Request)
+
+      if (ok) {
+        setStatus(statusEl, 'Account created.', 'success'); // if the account is created successfully, then shows this message to the user
+      } else if (conflict) {
+        setStatus(statusEl, 'That username already exists. Try another.', 'error'); // if the username already exists, then shows this message to the user
+      } else if (bad) {
+        setStatus(statusEl, 'username and password are required.', 'error'); // if the username or password is empty, then shows this message to the user
+      } else {
+        setStatus(statusEl, 'Error creating account. Please try again.', 'error'); // for any other errors, then shows this message to the user
+      }
+    } catch (_) {
+      setStatus(statusEl, 'Network error. Please try again.', 'error'); // if there is a network error, then shows this message to the user
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => { // when the DOM content is loaded, it will then call this function  
+  if (document.getElementById('submitBtn')) { // if the submit button is found
+    initRegisterPage(); // then it will call the function initRegisterPage to initialize the register page
+  }
+
+  if (document.getElementById('logolist')) { // if the logolist is found
+    showLogos(); // then it will call the function showLogos to show the logos of the fast food restaurants
+  }
+});
 
 
