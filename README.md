@@ -5,7 +5,7 @@ An interactive **tier list web application** built with **Node.js, Express, SQLi
 ---
 
 ## 🌐 Live Demo
-- 👉 **Tier List(Main App):** [View Website Live](https://fast-food-tier-list-project.onrender.com/ranklist)
+- 👉 **Tier List(Register page + Main app):** [View Website Live](https://fast-food-tier-list-project.onrender.com/register)
 - 👉 **Users(Admin View):** [View Website Live](https://fast-food-tier-list-project.onrender.com/users)
 
 ---
@@ -31,9 +31,9 @@ An interactive **tier list web application** built with **Node.js, Express, SQLi
 
 ## 📸 Screenshots
 
-| Tier List Page | Login Page | Users Page (For Admin) |
-|---|---|---|
-| ![Tier List screenshot](public/screenshots/Tier-List.png) | ![Login screenshot](public/screenshots/Login.png) | ![Users (For Admin) screenshot](public/screenshots/Users-List.png) |
+| Tier List Page | Login Page | Register Page | Users Page (For Admin) |
+|---|---|---|---|
+| ![Tier List screenshot](public/screenshots/Tier-List.png) | ![Login screenshot](public/screenshots/Login.png) | ![Register screenshot](public/screenshots/Register.png) | ![Users (For Admin) screenshot](public/screenshots/Users-List.png) |
 
 ---
 
@@ -56,8 +56,9 @@ sqlite3 fastfood.db
 node server.js
 
 # 5. Local URLs
- - Tier List: http://localhost:3000/ranklist
- - Users: http://localhost:3000/users
+ - Tier List Register Page: http://localhost:3000/register
+ - Tier List Main Page: http://localhost:3000/ranklist
+ - Users Page: http://localhost:3000/users
 
 # 6. Test Accounts
 - Admin
