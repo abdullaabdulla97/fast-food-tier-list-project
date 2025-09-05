@@ -1,6 +1,6 @@
 # 🍔 Fast Food Tier List
 
-An interactive **tier list web application** built with **Node.js, Express, SQLite, and Handlebars (HBS)**. Users can log in, drag and drop fast-food restaurant logos into S–F tiers, and save their personalized ranking. Includes a simple **admin view** for user management and review.
+An interactive tier-list web app built with **Node.js, Express, SQLite, and Handlebars**. Users **log in** and **drag-and-drop** fast-food logos into **S–F tiers**, with rankings saved to SQLite. Includes a lightweight **admin view** for user management. Originally a **COMP 2406** term project, later extended with a **public registration page (/register), mobile-friendly drag-and-drop (Pointer Events)**, and **Render** deployment.
 
 ---
 
